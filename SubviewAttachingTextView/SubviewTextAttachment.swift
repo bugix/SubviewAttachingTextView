@@ -87,12 +87,12 @@ private extension UIView {
 
     @objc(vv_attachmentFittingSize)
     var textAttachmentFittingSize: CGSize {
-        let fittingSize = self.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+        let fittingSize = self.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
         if fittingSize.width > 1e-3 && fittingSize.height > 1e-3 {
             return fittingSize
         } else {
             return self.bounds.size
         }
     }
-    
+
 }

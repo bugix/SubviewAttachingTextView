@@ -120,7 +120,7 @@ open class SubviewAttachingTextViewBehavior: NSObject, NSLayoutManagerDelegate, 
     }
 
     private static func boundingRect(forAttachmentCharacterAt characterIndex: Int, layoutManager: NSLayoutManager) -> CGRect? {
-        let glyphRange = layoutManager.glyphRange(forCharacterRange: NSMakeRange(characterIndex, 1), actualCharacterRange: nil)
+        let glyphRange = layoutManager.glyphRange(forCharacterRange: NSRange(location: characterIndex, length: 1), actualCharacterRange: nil)
         let glyphIndex = glyphRange.location
         guard glyphIndex != NSNotFound && glyphRange.length == 1 else {
             return nil
@@ -152,7 +152,7 @@ open class SubviewAttachingTextViewBehavior: NSObject, NSLayoutManagerDelegate, 
 
     // MARK: NSTextStorageDelegate
 
-    public func textStorage(_ textStorage: NSTextStorage, didProcessEditing editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int) {
+    public func textStorage(_ textStorage: NSTextStorage, didProcessEditing editedMask: NSTextStorage.EditActions, range editedRange: NSRange, changeInLength delta: Int) {
         if editedMask.contains(.editedAttributes) {
             self.updateAttachedSubviews()
         }
@@ -187,7 +187,7 @@ public extension UITextView {
         let insets = self.textContainerInset
         return rect.offsetBy(dx: insets.left, dy: insets.top)
     }
-    
+
 }
 
 private extension CGPoint {
@@ -209,7 +209,7 @@ private extension NSAttributedString {
         var ranges = [(SubviewTextAttachment, NSRange)]()
 
         let fullRange = NSRange(location: 0, length: self.length)
-        self.enumerateAttribute(NSAttributedStringKey.attachment, in: fullRange) { value, range, _ in
+        self.enumerateAttribute(NSAttributedString.Key.attachment, in: fullRange) { value, range, _ in
             if let attachment = value as? SubviewTextAttachment {
                 ranges.append((attachment, range))
             }
@@ -217,5 +217,5 @@ private extension NSAttributedString {
 
         return ranges
     }
-    
+
 }

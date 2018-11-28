@@ -18,11 +18,10 @@ class TapHandler: NSObject {
     }
 }
 
-
 // Load lorem ipsum from a file and create a long attributed string out of it
 let loremIpsum = try! String(contentsOf: #fileLiteral(resourceName: "lorem-ipsum.txt"))
 let repeatedLorem = String(repeating: loremIpsum, count: 3)
-let text = NSAttributedString(string: repeatedLorem, attributes: [ .font : UIFont.systemFont(ofSize: 14) ])
+let text = NSAttributedString(string: repeatedLorem, attributes: [ .font: UIFont.systemFont(ofSize: 14) ])
 
 // Make paragraph styles for attachments
 let centerParagraphStyle = NSMutableParagraphStyle()
@@ -69,7 +68,6 @@ textView.attributedText = text
     .insertingAttachment(SubviewTextAttachment(view: textField, size: CGSize(width: 200, height: 44)), at: 400, with: leftParagraphStyle)
     .insertingAttachment(SubviewTextAttachment(view: UIDatePicker()), at: 500, with: centerParagraphStyle)
     .insertingAttachment(SubviewTextAttachment(view: webView), at: 600, with: centerParagraphStyle)
-
 
 // Run the playground indefinitely with the text view as the live view
 PlaygroundPage.current.needsIndefiniteExecution = true
